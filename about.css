@@ -1,0 +1,41 @@
+body {
+    background-color: #121212;
+    color: white;
+}
+
+.navbar {
+    background-color: #b22222;
+}
+
+.navbar-nav {
+    margin-left: 0;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.dropdown-menu a {
+    color: black;
+}
+
+.dropdown-menu a:hover {
+    color: rgb(62, 152, 52);
+}
+
+.text-danger {
+    color: #ff6347;
+}
+
+.header {
+    background-color: black;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}

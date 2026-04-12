@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Non-Vegetarian Menu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>    
+        <h2 class="text-center fw-bold"><a href="index.html" class="text-white text-decoration-none">DIVISHA RESTAURANT</a></h2>
+    </header>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-2 sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">DIVISHA</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-white px-3" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white px-3" href="about.html">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="veg.html">Veg Menu</a></li>
+                            <li><a class="dropdown-item" href="non-veg.html">Non-Veg Menu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white px-3" href="cont.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center mt-3 mt-lg-0">
+                    <form class="d-flex me-3" onsubmit="event.preventDefault();">
+                        <input class="form-control me-2 rounded-pill" type="search" placeholder="Search Menu" aria-label="Search" id="menuSearch" onkeyup="handleSearch()">
+                        <button class="btn btn-warning rounded-pill px-3" type="button" onclick="handleSearch()">Search</button>
+                    </form>
+                    <a class="nav-link text-white cart-icon position-relative ms-3" href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span id="cart-count" class="cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark border border-white">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center text-danger fw-bold">Non-Vegetarian Menu</h2>
+        <div class="row mt-4" id="menu-items"></div>
+    </div>
+
+    <script>
+        const menuItems = [
+            { name: "Chicken Biryani", img: "chbiryani.jpg", desc: "Fragrant rice cooked with tender chicken pieces and aromatic spices.", price: 120 },
+            { name: "Mutton Curry", img: "Mutton_curry.jpg", desc: "Rich and flavorful slow-cooked mutton curry with a blend of spices.", price: 150 },
+            { name: "Grill Chicken", img: "grill_curry.jpg", desc: "Juicy and smoky grilled chicken marinated with traditional spices.", price: 180 },
+            { name: "Fish Fry", img: "fish_fry.jpg", desc: "Crispy fried fish with a spicy marinade, served with lemon and onion slices.", price: 130 },
+            { name: "Prawn Masala", img: "prawn_masala.jpg", desc: "Delicious prawns cooked in a spicy and tangy masala sauce.", price: 160 }
+        ];
+
+        function displayMenu(items = menuItems) {
+            const menuContainer = document.getElementById("menu-items");
+            menuContainer.innerHTML = ""; 
+
+            if (items.length === 0) {
+                menuContainer.innerHTML = "<div class='col-12 text-center mt-5'><h3>No items found</h3></div>";
+                return;
+            }
+
+            items.forEach((item, index) => {
+                const menuCard = `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="${item.img}" class="card-img-top img-fluid" alt="${item.name}" style="height: 250px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title text-center text-warning">${item.name}</h5>
+                                <p class="card-text text-center flex-grow-1">${item.desc}</p>
+                                <p class="text-center fw-bold fs-5">₹${item.price}</p>
+                                <div class="text-center mt-auto">
+                                    <button class="btn btn-warning btn-sm px-3" onclick='addToCart(${JSON.stringify(item)})'>Add to Cart</button>
+                                    <button class="btn btn-success btn-sm px-3" onclick="window.location.href='foodord.html'">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                menuContainer.innerHTML += menuCard;
+            });
+        }
+
+        function handleSearch() {
+            const query = document.getElementById("menuSearch").value;
+            const filtered = filterMenu(query, menuItems);
+            displayMenu(filtered);
+        }
+
+        displayMenu();
+
+        // Check for search parameter in URL
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                document.getElementById("menuSearch").value = searchQuery;
+                handleSearch();
+            }
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="bg-danger text-white py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Contact Information</h5>
+                    <p>Divisha Restaurant, Durga Nagar, Namakkal-637002</p>
+                    <p><strong>Phone:</strong> +91 93456 55403</p>
+                    <p><strong>Email:</strong> <a href="mailto:divisham.23it@kongu.edu" class="text-white">divisham.23it@kongu.edu</a></p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Follow Us</h5>
+                    <ul class="list-unstyled d-flex">
+                        <li class="me-3">
+                            <a href="@ divisha_restaurant" class="text-white" target="_blank"><i class="fab fa-facebook-square" style="font-size: 24px;"></i> Facebook</a>
+                        </li>
+                        <li class="me-3">
+                            <a href="@divisha_restaurant" class="text-white" target="_blank"><i class="fab fa-twitter-square" style="font-size: 24px;"></i> Twitter</a>
+                        </li>
+                        <li>
+                            <a href="@ divi_9705" class="text-white" target="_blank"><i class="fab fa-instagram" style="font-size: 24px;"></i> Instagram</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold">Additional Information</h5>
+                    <p>Operating Hours: 8:00 AM - 10:00 PM (Mon - Fri)</p>
+                    <p>11:00 AM - 11:00 PM (Sat - Sun)</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
