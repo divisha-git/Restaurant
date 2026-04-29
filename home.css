@@ -71,6 +71,30 @@ body {
     padding: 3px 6px;
 }
 
+/* Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    background-color: #ffc107;
+    color: #000;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#back-to-top:hover {
+    background-color: #e0a800;
+    transform: scale(1.1);
+}
+
 .navbar-nav .nav-link {
     font-weight: 500;
     transition: color 0.3s ease;
