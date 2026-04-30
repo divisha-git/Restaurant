@@ -95,6 +95,16 @@ body {
     transform: scale(1.1);
 }
 
+/* Social Media Hover Effect */
+.list-unstyled d-flex a i {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.list-unstyled d-flex a:hover i {
+    transform: scale(1.2);
+    color: #ffc107 !important;
+}
+
 .navbar-nav .nav-link {
     font-weight: 500;
     transition: color 0.3s ease;
